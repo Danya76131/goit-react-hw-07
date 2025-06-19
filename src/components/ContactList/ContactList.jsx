@@ -1,19 +1,9 @@
 import { useSelector } from "react-redux";
-import { useMemo } from "react";
 import Contact from "../Contact/Contact";
-import { selectContacts } from "../../redux/contactsSlice";
-import { selectNameFilter } from "../../redux/filtersSlice";
+import { selectFilteredContacts } from "../../redux/contactsSlice";
 
 const ContactList = () => {
-  const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectNameFilter).toLowerCase();
-
-  // Мемоізація відфільтрованого списку
-  const filteredContacts = useMemo(() => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter)
-    );
-  }, [contacts, filter]);
+  const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
     <ul>
